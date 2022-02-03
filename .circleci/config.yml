@@ -1,0 +1,35 @@
+version: 2.1
+
+commands:
+  build:
+    steps:
+      - checkout
+      - run:
+          name: verify Pants work
+          command: ./pants --version
+      - run:
+          name: Build Docker image
+          command: ./pants package src/docker/whale-tailored-patns/Dockerfile
+      - run:
+          name: List Docker images
+          command: docker image ls  
+
+jobs:
+  build_remote_docker:
+    docker:
+      - image: cimg/python:3.9
+    steps:
+      - setup_remote_docker:
+          version: 19.03.14
+      - build
+  build_machine:
+    machine:
+      image: ubuntu-2004:202107-02
+    steps:
+      - build
+
+workflows:
+  trousers:
+    jobs:
+      - build_remote_docker
+      - build_machine
