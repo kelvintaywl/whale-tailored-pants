@@ -5,3 +5,8 @@ backend_packages = [
   "pants.backend.experimental.docker",
   "pants.backend.experimental.docker.lint.hadolint"
 ]
+
+[docker]
+env_vars = [
+  "DOCKER_HOST"
+]
