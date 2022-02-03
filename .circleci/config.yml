@@ -9,7 +9,7 @@ commands:
           command: ./pants --version
       - run:
           name: Build Docker image
-          command: ./pants package src/docker/whale-tailored-patns/Dockerfile
+          command: ./pants package src/docker/whale-tailored-pants/Dockerfile
       - run:
           name: List Docker images
           command: docker image ls  
